@@ -3,7 +3,7 @@ set -e
 
 RG_NAME="rg-devops-lab"
 LOCATION="centralindia"
-STORAGE_NAME="stdevops$(date +%s)"
+STORAGE_NAME="stdevops$RANDOM"
 
 echo "Creating Resource Group..."
 az group create \
