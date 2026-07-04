@@ -1,0 +1,22 @@
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  serviceConnection: 'azure-terraform-sc'
+
+steps:
+
+- task: AzureCLI@2
+  displayName: Create Resource Group
+
+  inputs:
+    azureSubscription: $(serviceConnection)
+    scriptType: bash
+    scriptLocation: inlineScript
+    inlineScript: |
+      set -e
+
+      az group create --name rg-devops-lab --location centralindia
