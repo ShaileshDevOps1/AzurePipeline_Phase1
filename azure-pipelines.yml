@@ -7,16 +7,25 @@ pool:
 variables:
   serviceConnection: 'azure-terraform-sc'
 
-steps:
+stages:
 
-- task: AzureCLI@2
-  displayName: Create Resource Group
+- stage: Deploy
+  displayName: Deploy Infrastructure
 
-  inputs:
-    azureSubscription: $(serviceConnection)
-    scriptType: bash
-    scriptLocation: inlineScript
-    inlineScript: |
-      set -e
+  jobs:
 
-      az group create --name rg-devops-labbra --location centralindia
+  - job: DeployAzureResources
+    displayName: Create RG and Storage Account
+
+    steps:
+
+    - checkout: self
+
+    - task: AzureCLI@2
+      displayName: Execute Deployment Script
+
+      inputs:
+        azureSubscription: $(serviceConnection)
+        scriptType: bash
+        scriptLocation: scriptPath
+        scriptPath: scripts/deploy.sh
