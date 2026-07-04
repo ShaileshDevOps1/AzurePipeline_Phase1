@@ -19,4 +19,4 @@ steps:
     inlineScript: |
       set -e
 
-      az group create --name rg-devops-lab --location centralindia
+      az group create --name rg-devops-labbra --location centralindia
